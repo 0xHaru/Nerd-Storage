@@ -1,0 +1,108 @@
+/* Root */
+:root {
+    --custom-black: #2d2d2d;
+}
+
+/* HTML Elements */
+body {
+    font-family: 'JetBrains Mono';
+    margin-right: 20%;
+    margin-left: 20%;
+}
+
+nav {
+    padding-bottom: 1rem;
+}
+
+/* Classes */
+.invisible {
+    visibility: hidden;
+}
+
+.display-none {
+    display: none;
+}
+
+.unselectable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+}
+
+.margin-x {
+    margin-right: 2rem;
+    margin-left: 2rem;
+}
+
+.margin-x-alt {
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.margin-y {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.margin-y-alt {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.float-right {
+    float: right;
+    clear: both;
+}
+
+.shift-right {
+    margin-left: 95%;
+}
+
+.li-circle {
+    list-style-type: circle;
+}
+
+.simple-button {
+    background: none;
+    border: none;
+    font-weight: bold;
+    color: var(--custom-black);
+    clear: both;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Elements */
+#dir-checkbox {
+    margin-top: 1rem;
+}
+
+.download {
+    margin-left: 1rem;
+}
+
+/* Media Queries */
+@media (max-width: 950px) {
+    body {
+        margin-right: 5%;
+        margin-left: 5%;
+    }
+
+    .shift-right {
+        margin-left: 94%;
+    }
+}
+
+@media (max-width: 500px) {
+    .shift-right {
+        margin-left: 90%;
+    }
+}

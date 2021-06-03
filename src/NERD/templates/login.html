@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block content %}
+<h1 class="centered margin-y">Login</h1>
+
+<form class="centered margin-y" method="POST">
+    <input type="password" name="password" placeholder="Password" required />
+    <input type="submit" value="Submit" />
+</form>
+
+{% with messages = get_flashed_messages() %} {% if messages %}
+<ul class="centered margin-y">
+    {% for message in messages %}
+    <li class="li-circle">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %} {% endwith %} {% endblock %}

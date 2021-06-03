@@ -1,0 +1,89 @@
+{% extends "base.html" %} {% block content %}
+<h2 class="centered margin-y">Directory listing for {{ directory }}</h2>
+
+<div class="centered">
+    <form class="margin-x" method="POST">
+        <input type="text" name="directory" placeholder="Directory" required />
+        <input type="submit" value="Create" />
+    </form>
+
+    <form class="margin-x" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" multiple required />
+        <input type="submit" value="Upload" /><br />
+
+        <div id="dir-checkbox">
+            <label class="unselectable">
+                <input type="checkbox" name="dir-checkbox" value="True" />
+                Make directory from .zip
+            </label>
+        </div>
+    </form>
+</div>
+
+{% with messages = get_flashed_messages() %} {% if messages %}
+<ul>
+    {% for message in messages %}
+    <li class="li-circle">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %} {% endwith %}
+
+<button id="edit-button" class="shift-right">Edit</button>
+
+<hr />
+
+{# Index #}
+<ul>
+    {% for x in index %}
+    <li class="margin-y-alt">
+        <a href="{{ index[x] }}">{{ x }}</a>
+        {% if x != '..' %}
+        <span class="float-right">
+            {% set download_link = "/downloads/" + "/".join(index[x].split("/")[2:]) %}
+            <a class="download float-right" href="{{ download_link }}"> DOWNLOAD </a>
+
+            <button
+                class="update simple-button cursor-pointer invisible"
+                name="{{ x }}"
+            >
+                UPDATE
+            </button>
+
+            <button
+                class="delete simple-button cursor-pointer invisible"
+                name="{{ x }}"
+            >
+                DELETE
+            </button>
+        </span>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+<hr />
+
+{# Delete Dialog #}
+<div id="delete-dialog" class="display-none" title="Delete">
+    <p></p>
+</div>
+
+{# Update Dialog #}
+<form
+    id="update-dialog"
+    class="display-none"
+    title="Update"
+    method="POST"
+    enctype="multipart/form-data"
+>
+    <label>Original Name:</label><br />
+    <input class="margin-y-alt" type="text" name="original-name" readonly /><br />
+
+    <label>Updated Name:</label><br />
+    <input class="margin-y-alt" type="text" name="updated-name" /><br />
+
+    <label>Updated File:</label><br />
+    <input class="margin-y-alt" type="file" name="updated-file" />
+</form>
+
+{% endblock %}

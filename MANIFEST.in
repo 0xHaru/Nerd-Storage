@@ -1,0 +1,7 @@
+include LICENSE
+recursive-include media *
+recursive-include cli *
+recursive-include src/NERD/hash *
+recursive-include src/NERD/static *
+recursive-include src/NERD/templates *
+recursive-include src/NERD/tmp *

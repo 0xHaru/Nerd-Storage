@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=JetBrains+Mono"
+        />
+
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{{ url_for('static', filename='style.css') }}"
+        />
+
+        <link
+            rel="stylesheet"
+            href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+        />
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+
+        <title>Nerd-Storage</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="{{ url_for('static', filename='icon.png') }}"
+        />
+        {# Icon made by: www.freepik.com from: www.flaticon.com #}
+    </head>
+
+    <body>
+        <nav>
+            {% if user.is_authenticated %}
+            <a class="float-right" href="/logout">Logout</a>
+            {% endif %}
+        </nav>
+        {% block content %}{% endblock %}
+    </body>
+</html>
