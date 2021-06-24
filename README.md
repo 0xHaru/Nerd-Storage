@@ -51,6 +51,25 @@ This command will output the full path of `hash.py` and `config.py`:
 
 `pip show Nerd-Storage | grep 'Location' | grep -o -E '[/].+' | xargs -I@ printf '@/NERD/hash/hash.py\n@/NERD/config.py\n'`
 
+## Known Issues
+
+1. If your `/tmp` is too small, change it in `/etc/fstab` by following the steps in the section below.
+2. If a file is uploaded that is larger than the amount of RAM available on the host machine, the host machine will crash. This is believed to be an error in the [Werkzeug](https://github.com/pallets/werkzeug) module (a [Flask](https://github.com/pallets/flask) dependency). We are currently investigating this and trying to find a monkey patch or a fix. Internal developers on the [Pallets Team](https://github.com/pallets) have been informed and are aware of the issue.
+
+## Fixing /tmp Size in /etc/fstab
+
+Editing `/etc/fstab` can be done with Vim, Nano, GEdit, etc. but _must_ be run as **sudo**.
+
+This is an example with nano: `sudo nano /etc/fstab`
+Note: it may be slightly different on different machines, but the core concept is the same; look for `/tmp` or `tmpfs`
+
+Each line in `/etc/fstab` follows this format: `<file system> <dir> <type> <options> <dump> <pass>`
+You will find the line:
+`tmpfs /tmp tmpfs defaults,noatime,mode=1777 0 0`
+and append a `size=10G` after the `defaults`, making the new line:
+`tmpfs /tmp tmpfs defaults,size=10G,noatime,mode=1777 0 0`
+and Save and Close the file, then reboot the system.
+
 ## CLI
 
 [nerdcli](https://github.com/0xHaru/Nerd-Storage/blob/master/cli/nerdcli.sh) is a command line interface for Nerd-Storage.
