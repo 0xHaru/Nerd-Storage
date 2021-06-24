@@ -61,13 +61,16 @@ This command will output the full path of `hash.py` and `config.py`:
 Editing `/etc/fstab` can be done with Vim, Nano, GEdit, etc. but _must_ be run as **sudo**.
 
 This is an example with nano: `sudo nano /etc/fstab`
-Note: it may be slightly different on different machines, but the core concept is the same; look for `/tmp` or `tmpfs`
+Note: it may be slightly different on different machines, but the core concept is the same; look for `/tmp` or `tmpfs`.
 
 Each line in `/etc/fstab` follows this format: `<file system> <dir> <type> <options> <dump> <pass>`
-You will find the line:
-`tmpfs /tmp tmpfs defaults,noatime,mode=1777 0 0`
+
+You will find the line: `tmpfs /tmp tmpfs defaults,noatime,mode=1777 0 0`
+
 and append a `size=10G` after the `defaults`, making the new line:
+
 `tmpfs /tmp tmpfs defaults,size=10G,noatime,mode=1777 0 0`
+
 and Save and Close the file, then reboot the system.
 
 ## CLI
