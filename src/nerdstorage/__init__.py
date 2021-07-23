@@ -3,7 +3,7 @@ import os
 from flask import Flask
 from flask_login import LoginManager
 
-from NERD import config
+from nerdstorage import config
 
 from .auth import auth
 from .models import User

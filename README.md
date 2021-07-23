@@ -22,8 +22,6 @@ The user can also upload an existing directory as a .zip file which will then be
 
 ## Dependencies
 
-`pip install Flask && pip install Flask-Login && pip install Jinja2`
-
 -   [Flask](https://pypi.org/project/Flask/)
 
 -   [Flask-Login](https://pypi.org/project/Flask-Login/)
@@ -49,7 +47,21 @@ To print help information: `nerdstorage --help`
 
 This command will output the full path of `hash.py` and `config.py`:
 
-`pip show Nerd-Storage | grep 'Location' | grep -o -E '[/].+' | xargs -I@ printf '@/NERD/hash/hash.py\n@/NERD/config.py\n'`
+`pip show Nerd-Storage | grep 'Location' | grep -o -E '[/].+' | xargs -I@ printf '@/nerdstorage/hash/hash.py\n@/nerdstorage/config.py\n'`
+
+## Large Files
+
+![](./media/large_file.png)
+
+This feature allows the upload of files of size equal to or greater than the RAM of the machine running Nerd-Storage.
+
+For example if the application is running on a machine with 4GB of RAM to upload a file of size equal to or greater than 4GB this feature has to be used.
+
+Related issue: [github.com/0xHaru/Nerd-Storage/issues/1](https://github.com/0xHaru/Nerd-Storage/issues/1)
+
+### Brief Explanation
+
+The client uses [flow.js](https://github.com/flowjs/flow.js/) to split the file into chunks and send them independently. The server saves each chunk as a separate file, then once all the chunks have been received the server merges them together to recreate the original file.
 
 ## CLI
 

@@ -18,6 +18,7 @@ from .utils.security_util import prefix_check, security
 from .utils.util import (
     RemoveFile,
     exist_check,
+    merge_chunks,
     replace_dir,
     sort_index,
     unzip,
@@ -27,7 +28,7 @@ from .utils.util import (
 
 # /index
 # Method: GET
-def get_handler(request, path):
+def index_get_handler(request, path):
     storage_path = current_app.config["STORAGE_PATH"]
     abs_path = os.path.join(storage_path, path)
 
@@ -52,7 +53,7 @@ def get_handler(request, path):
 
 
 # Method: POST
-def post_handler(request, path):
+def index_post_handler(request, path):
     storage_path = current_app.config["STORAGE_PATH"]
     rel_path = path
 
@@ -137,7 +138,7 @@ def post_handler(request, path):
 
 
 # Method: DELETE
-def delete_handler(request, path):
+def index_delete_handler(request, path):
     status = 500
 
     # If it's a directory
@@ -170,7 +171,7 @@ def delete_handler(request, path):
 
 # /downloads
 # Method: GET
-def download_handler(request, path):
+def download_get_handler(request, path):
     storage_path = current_app.config["STORAGE_PATH"]
     abs_path = os.path.join(storage_path, path)
 
@@ -201,3 +202,57 @@ def download_handler(request, path):
             as_attachment=True,
             attachment_filename=f"{dir_name}.zip",
         )
+
+
+# /large-file/upload
+# Method: GET
+def large_file_get_handler(request):
+    tmp_path = f"{current_app.config['BASE_PATH']}/tmp"
+
+    chunk_number = request.args.get("flowChunkNumber", type=int)
+    filename = request.args.get("flowFilename", type=str)
+    identifier = request.args.get("flowIdentifier", type=str)
+    identifier = identifier.split("-")[0]
+
+    path = f"{tmp_path}/{identifier}"
+
+    chunk_name = f"{chunk_number}_{filename}"
+    chunk_path = f"{path}/{chunk_name}"
+
+    if os.path.isfile(chunk_path):
+        # This chunk already exists
+        return Response(status=200)
+    else:
+        # This chunk does not exists and needs to be uploaded
+        return Response(status=100)
+
+
+# /large-file/upload
+# Method: POST
+def large_file_post_handler(request):
+    tmp_path = f"{current_app.config['BASE_PATH']}/tmp"
+
+    total_chunks = request.form.get("flowTotalChunks", type=int)
+    chunk_number = request.form.get("flowChunkNumber", default=1, type=int)
+    filename = request.form.get("flowFilename", default="error", type=str)
+    identifier = request.form.get("flowIdentifier", default="error", type=str)
+    identifier = identifier.split("-")[0]
+
+    # Get the chunk
+    chunk = request.files["file"]
+
+    path = f"{tmp_path}/{identifier}"
+
+    if not os.path.isdir(path):
+        os.mkdir(path)
+
+    # Save the chunk
+    chunk_name = f"{chunk_number}_{filename}"
+    chunk_path = f"{path}/{chunk_name}"
+    chunk.save(chunk_path)
+
+    if chunk_number == total_chunks:
+        merge_chunks(path, filename)
+        shutil.rmtree(path)
+
+    return Response(status=200)

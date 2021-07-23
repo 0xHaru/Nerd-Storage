@@ -1,8 +1,8 @@
 import os
 
-from NERD import config
+from nerdstorage import config
 
-VERSION = "0.1.2"
+VERSION = "0.2.0"
 
 HELP = ["-h", "--help"]
 
@@ -39,7 +39,7 @@ def help():
         "This command will output the full path of hash.py and config.py:\n\t    "
         f"{Color.GREEN}pip show Nerd-Storage | "
         "grep 'Location' | grep -o -E '[/].+' | "
-        r"xargs -I@ printf '@/NERD/hash/hash.py\n@/NERD/config.py\n'"
+        r"xargs -I@ printf '@/nerdstorage/hash/hash.py\n@/nerdstorage/config.py\n'"
     )
 
 

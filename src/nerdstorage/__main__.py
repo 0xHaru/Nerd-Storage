@@ -1,8 +1,8 @@
 import sys
 
-from NERD import create_app
-from NERD.config import PORT
-from NERD.utils.config_util import args_parser, check_config
+from nerdstorage import create_app
+from nerdstorage.config import PORT
+from nerdstorage.utils.config_util import args_parser, check_config
 
 app = create_app()
 

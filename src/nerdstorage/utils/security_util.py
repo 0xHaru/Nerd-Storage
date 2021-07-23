@@ -1,7 +1,7 @@
 import os
 
 from flask import current_app, flash
-from NERD import config
+from nerdstorage import config
 from werkzeug.utils import secure_filename
 
 

@@ -1,3 +1,4 @@
+import glob
 import os
 import shutil
 import time
@@ -83,6 +84,20 @@ def zip_directory(path):
 def unzip(src, dest):
     with zipfile.ZipFile(src, "r") as z:
         z.extractall(dest)
+
+
+def merge_chunks(path, filename):
+    storage_path = current_app.config["STORAGE_PATH"]
+
+    chunks = sorted(
+        glob.glob(f"{path}/*"),
+        key=lambda x: int(x.rsplit("/")[-1].split("_")[0]),
+    )
+
+    with open(f"{storage_path}/{filename}", "wb") as dest:
+        for chunk in chunks:
+            with open(chunk, "rb") as src:
+                shutil.copyfileobj(src, dest)
 
 
 class RemoveFile(Thread):

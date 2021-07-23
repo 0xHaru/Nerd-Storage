@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=JetBrains+Mono"
+        />
+
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{{ url_for('static', filename='style.css') }}"
+        />
+
+        <script defer src="{{ url_for('static', filename='flow.min.js') }}"></script>
+        <script defer src="{{ url_for('static', filename='large_file.js') }}"></script>
+
+        <title>Nerd-Storage</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="{{ url_for('static', filename='icon.png') }}"
+        />
+        {# Icon made by: www.freepik.com from: www.flaticon.com #}
+    </head>
+
+    <body>
+        <nav>
+            {% if user.is_authenticated %}
+            <a class="float-left" href="/index">Index</a>
+            <a class="float-right" href="/logout">Logout</a>
+            {% endif %}
+        </nav>
+
+        <h2 class="centered margin-y">Upload a Large File</h2>
+
+        <div class="centered">
+            <form method="POST" enctype="multipart/form-data">
+                <input id="browseButton" type="button" value="Choose File" />
+                <label id="filename-label">No file chosen</label>
+                <input id="submitButton" type="button" value="Upload" />
+            </form>
+        </div>
+
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li class="li-circle">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+    </body>
+</html>

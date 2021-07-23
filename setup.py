@@ -10,7 +10,7 @@ with open(f"{CURRENT_DIR}/README.md", "r", encoding="utf-8") as fh:
 setup(
     name="Nerd-Storage",
     description="A simple LAN storage.",
-    version="0.1.2",
+    version="0.2.0",
     license="GPLv3",
     author="0xHaru",
     author_email="0xharu.git@gmail.com",
@@ -38,7 +38,7 @@ setup(
     include_package_data=True,
     entry_points={
         "console_scripts": [
-            "nerdstorage=NERD.__main__:main",
+            "nerdstorage=nerdstorage.__main__:main",
         ]
     },
 )

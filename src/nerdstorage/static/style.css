@@ -57,7 +57,10 @@ nav {
 
 .float-right {
     float: right;
-    clear: both;
+}
+
+.float-left {
+    float: left;
 }
 
 .shift-right {
@@ -83,6 +86,12 @@ nav {
 /* Elements */
 #dir-checkbox {
     margin-top: 1rem;
+}
+
+#filename-label {
+    font-family: initial !important;
+    font-size: small;
+    margin-right: 4rem;
 }
 
 .download {

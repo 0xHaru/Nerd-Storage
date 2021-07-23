@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 
-from NERD import config
+from nerdstorage import config
 
 from .utils.security_util import get_hashed_pw
 
