@@ -2,7 +2,7 @@ import os
 
 from nerdstorage import config
 
-VERSION = "0.2.0"
+VERSION = "0.2.1"
 
 HELP = ["-h", "--help"]
 

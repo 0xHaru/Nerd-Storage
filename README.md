@@ -51,7 +51,7 @@ This command will output the full path of `hash.py` and `config.py`:
 
 ## Large Files
 
-![](./media/large_file.png)
+![](https://raw.githubusercontent.com/0xHaru/Nerd-Storage/master/media/large_file.png)
 
 This feature allows the upload of files of size equal to or greater than the RAM of the machine running Nerd-Storage.
 

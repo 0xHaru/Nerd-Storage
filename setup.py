@@ -10,7 +10,7 @@ with open(f"{CURRENT_DIR}/README.md", "r", encoding="utf-8") as fh:
 setup(
     name="Nerd-Storage",
     description="A simple LAN storage.",
-    version="0.2.0",
+    version="0.2.1",
     license="GPLv3",
     author="0xHaru",
     author_email="0xharu.git@gmail.com",
