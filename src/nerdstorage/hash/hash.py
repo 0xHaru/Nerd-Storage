@@ -3,7 +3,7 @@ from getpass import getpass
 
 from werkzeug.security import generate_password_hash
 
-BASE_PATH = os.path.dirname(__file__)
+BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 
 try:
     password = getpass()
