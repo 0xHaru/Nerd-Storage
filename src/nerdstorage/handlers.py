@@ -200,7 +200,7 @@ def download_get_handler(request, path):
             zipped,
             mimetype="application/zip",
             as_attachment=True,
-            attachment_filename=f"{dir_name}.zip",
+            download_name=f"{dir_name}.zip",
         )
 
 
